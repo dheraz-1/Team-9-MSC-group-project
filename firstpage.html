@@ -1,114 +1,108 @@
 <!DOCTYPE html>
 <html lang="">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title> Age and Gender Predictor Tool</title>
-    
-    <link rel = "stylesheet" href="firstpage.css">
-    
+
+    <link rel="stylesheet" href="firstpage.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 
-    </head>
-    
-    
-    
-    
+</head>
+
+
+
+
 <body>
-    
-    <div class="tool-part-1">
-    
-    <h1>Age and Gender Prediction tool</h1>
-    
-    <div class="input-image">
-        
-     <div class="row">
-         
-    
-        <div class="col-3 drag-and-drop">
-            
-            <div class="content">
-        
-            <h4>Drag or drop</h4>
-            <span> <h6>OR</h6></span>    
-<!--            <button type="button" class="btn"><h4>Upload a picture</h4></button>-->
-                
-                
-                
-            <input type="file" accept="image/png, image/jpg, image/gif, image/jpeg" id="myfile" name="myfile" class="upload-image">
-            
-<!--            <label for="myfile"><button>Upload</button></label>-->
-            <br><br>
-            
-          
+
+    <div class="front-page">
+
+        <div class="tool-part-1">
+
+            <h1>Age and Gender Prediction tool</h1>
+
+            <div class="input-image">
+
+                <div class="row">
+
+
+                    <div class="col-3 drag-and-drop shadow-lg p-3 mb-5">
+
+                        <div class="content">
+
+                            <h4>Drag or drop</h4>
+
+                            <span>
+                                <h6>OR</h6>
+                            </span>
+
+                            <input type="file" accept="image/png, image/jpg, image/gif, image/jpeg" id="myfile" name="myfile" class="upload-image" style="display:none;">
+
+                            <!--            <label for="myfile"><button>Upload</button></label>-->
+                            <br><br>
+
+                            <label for="myfile" id="upload-button">Upload Image</label>
+
+                        </div>
+
+                    </div>
+
+
+                    <script>
+                        const target = document.getElementById('drag-and-drop');
+
+                        target.addEventListener('drop', (e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+
+                            doSomethingWithFiles(e.dataTransfer.files);
+                        });
+
+                        target.addEventListener('dragover', (e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+
+                            e.dataTransfer.dropEffect = 'copy';
+                        });
+                    </script>
+
+
+
+
+                    <div class="col-3 take-a-picture shadow-lg p-3 mb-5">
+
+                        <div class="content">
+
+                            <i class="fa fa-camera camera-button" style="font-size:48px;color:red"></i>
+                            <p></p>
+                            <h4>Take a picture</h4>
+
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
-            
+
+
+            <input type="submit">
+
         </div>
-         
-         
-        <script>
-  const target = document.getElementById('drag-and-drop');
 
-  target.addEventListener('drop', (e) => {
-    e.stopPropagation();
-    e.preventDefault();
+        <p id="copyright"> © Team 9 - MSC Group Project - All Rights Reserved.</p>
 
-    doSomethingWithFiles(e.dataTransfer.files);
-  });
-
-  target.addEventListener('dragover', (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-
-    e.dataTransfer.dropEffect = 'copy';
-  });
-</script> 
-         
-         
-         
-         
-         
-         
-    
-        <div class="col-3 take-a-picture">
-            
-            <div class="content">
-       
-            <i class="fa fa-camera camera-button" style="font-size:48px;color:red"></i> 
-            <p></p>
-            <h4>Take a picture</h4>    
-            
-            </div>
-            
-        </div>
-    
     </div>
-    </div>
-    
-    
-    <input type="submit">
-    
-    </div>
-    
-    <p id = "copyright"> © Team 9 - MSC Group Project - All Rights Reserved.</p>    
 
-    
-
-</body>
-    
-    
-    
-</html>
-
-
-
+</body></html>
 
 
 
