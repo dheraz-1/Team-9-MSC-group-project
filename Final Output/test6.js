@@ -27,7 +27,7 @@ submitBtn.addEventListener('click', () => {
 function submitImage() {
 
 
-    const url = 'http://202.46.3.73:8001/files'; // replace this with your backend URL
+    const url = 'http://202.46.3.73:8002/files'; // replace this with your backend URL
     const fileInput = document.getElementById('imageFile');
 
     // Check if file input element exists
@@ -131,7 +131,7 @@ takePictureBtn.addEventListener('click', () => {
 // submit for capture
 function sendImageToBackend(fileContent) {
     // Create a new FormData object
-    const url = 'http://202.46.3.73:8001/files';
+    const url = 'http://202.46.3.73:8002/files';
     // const fileInput = document.getElementById('preview-image');
 
     //add rully 20240413
