@@ -1,10 +1,15 @@
 var dataRecieved;
+let isAgreed = false;
 
 // Upload Image
 const submitBtn = document.getElementById('upload-button');
 submitBtn.addEventListener('click', () => {
 
+    // if (isAgreed) {
+        
+    // }
     clearTables();
+    removeErrorWarning();
 
     const fileInput = document.getElementById('imageFile');
     const file = fileInput.files[0];
@@ -20,42 +25,62 @@ submitBtn.addEventListener('click', () => {
     }
 });
 
+const agreeCheckbox = document.getElementById('checkbox-agree');
+
+agreeCheckbox.addEventListener('click', (event)=>{
+    // event.preventDefault();
+    console.log('checked')
+    isAgreed=true;
+    console.log(isAgreed)
+    removeDataPolicyError()
+})
 
 
 
 // Submit Uploaded Image
 function submitImage() {
 
+    if (isAgreed) {
+        const url = 'http://localhost:8000/files'; // replace this with your backend URL
+        const fileInput = document.getElementById('imageFile');
 
-    const url = 'http://202.46.3.73:8002/files'; // replace this with your backend URL
-    const fileInput = document.getElementById('imageFile');
+        // Check if file input element exists
+        if (!fileInput) {
+            console.error('File input element not found');
+            return;
+        }
 
-    // Check if file input element exists
-    if (!fileInput) {
-        console.error('File input element not found');
-        return;
+        const formData = new FormData();
+        formData.append('test', fileInput.files[0]);
+
+        const options = {
+            method: 'POST',
+            body: formData
+        };
+
+        fetch(url, options)
+            .then(response => response.json())
+            .then(data => {
+                // process the response data here
+                console.log("success_upload");
+                console.log(data);
+                dataRecieved = data;
+                // showAgeAndGender();
+
+                if (dataRecieved['error']) {
+                    showErrorWarning();
+                } else {
+                    showAgeAndGender();
+                    showColours(fileInput);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }
-
-    const formData = new FormData();
-    formData.append('test', fileInput.files[0]);
-
-    const options = {
-        method: 'POST',
-        body: formData
-    };
-
-    fetch(url, options)
-        .then(response => response.json())
-        .then(data => {
-            // process the response data here
-            console.log("success_upload");
-            console.log(data);
-            dataRecieved = data;
-            showAgeAndGender();
-        })
-        .catch(error => {
-            console.error(error);
-        });
+    else{
+        showDataPolicyError()
+    }
 }
 
 // Capture Image
@@ -66,13 +91,15 @@ videoElement.classList.add('camera-preview');
 
 takePictureBtn.addEventListener('click', () => {
     clearTables();
+    removeErrorWarning();
+    document.getElementById('colorSwatches').innerHTML = 'Please Submit an Image';
 
     document.getElementById("upload-button").style.display = 'none';
     document.getElementById("submit-button").style.display = 'none';
 
     navigator.mediaDevices.getUserMedia({
-            video: true
-        })
+        video: true
+    })
         .then((stream) => {
             videoElement.srcObject = stream;
             videoElement.play();
@@ -130,54 +157,58 @@ takePictureBtn.addEventListener('click', () => {
 
 // submit for capture
 function sendImageToBackend(fileContent) {
-    // Create a new FormData object
-    const url = 'http://202.46.3.73:8002/files';
-    // const fileInput = document.getElementById('preview-image');
+    if(isAgreed){
+        // Create a new FormData object
+        const url = 'http://localhost:8000/files';
+        // const fileInput = document.getElementById('preview-image');
 
-    //add rully 20240413
-    // Convert the data to a Blob object
-    var blob = dataURItoBlob(fileContent);
+        //add rully 20240413
+        // Convert the data to a Blob object
+        var blob = dataURItoBlob(fileContent);
 
-    const formData = new FormData();
+        const formData = new FormData();
 
 
-    // Add the image data to the form data
-    //formData.append('test', fileContent);
-    //modif rully 20240413
-    formData.append('test', blob, 'image_from_webcam.jpg');
+        // Add the image data to the form data
+        //formData.append('test', fileContent);
+        //modif rully 20240413
+        formData.append('test', blob, 'image_from_webcam.jpg');
 
-    // Send a POST request to the backend endpoint
-    fetch(url, {
+        // Send a POST request to the backend endpoint
+        fetch(url, {
             method: 'POST',
             body: formData
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Unable to send image to backend');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Handle the response from the backend
-            console.log("success_capture");
-            console.log(data);
-            dataRecieved = data;
-            showAgeAndGender();
-        })
-        .catch(error => {
-            // Handle any errors that occurred during the request
-            console.error(error);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Unable to send image to backend');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Handle the response from the backend
+                console.log("success_capture");
+                console.log(data);
+                dataRecieved = data;
+                // showAgeAndGender();
+
+                if (dataRecieved['error']) {
+                    showErrorWarning();
+                } else {
+                    showAgeAndGender();
+                    showColours();
+                }
+            })
+            .catch(error => {
+                // Handle any errors that occurred during the request
+                console.error(error);
+            });
+    }
+    else{
+        showDataPolicyError()
+    }
 }
 
-// function downloadImage(dataUrl, fileName) {
-//     const link = document.createElement('a');
-//     link.href = dataUrl;
-//     link.download = fileName;
-//     document.body.appendChild(link);
-//     link.click();
-//     document.body.removeChild(link);
-//   }
 
 //add rully 20240413
 // Function to convert data URI to Blob object
@@ -214,7 +245,6 @@ function showAgeAndGender() {
     const maxElementIndex = dataRecieved['gender'].indexOf(Math.max(...dataRecieved['gender']));
     // for (let i = 0; i < length())
     inputGender(dataRecieved['gender_labels'][maxElementIndex]);
-
 
     // Table 
     // Assuming that the data is in the dataReceived object as dataReceived['age'] and dataReceived['age_labels']
@@ -312,7 +342,52 @@ function inputGenderTable(ageData, ageLabels) {
 function clearTables() {
     const ageTable = document.getElementById('age-table');
     const genderTable = document.getElementById('gender-table');
-
+    console.log('cleared Table');
     ageTable.innerHTML = '';
     genderTable.innerHTML = '';
+}
+
+function showErrorWarning() {
+    const message = document.getElementById("imageError");
+
+    message.style.display = "block";
+}
+
+function removeErrorWarning() {
+    const message = document.getElementById("imageError");
+
+    message.style.display = "none";
+}
+
+function showDataPolicyError(){
+    const message = document.getElementById('data-policy-error');
+
+    message.style.display = "block";
+}
+
+function removeDataPolicyError(){
+    const message = document.getElementById('data-policy-error');
+    
+    message.style.display = "none";
+}
+
+function showColours() {
+
+    const colorPalette = dataRecieved['dominant_colors'];
+    const colorSwatches = document.getElementById('colorSwatches');
+
+    colorSwatches.innerHTML = ''; // clear previous swatches
+
+
+    if (colorPalette) {
+        colorPalette.forEach(colorSample => {
+            const colorSwatch = document.createElement('div');
+            colorSwatch.classList.add('color-swatch');
+            colorSwatch.style.backgroundColor = colorSample.hex;
+            colorSwatches.appendChild(colorSwatch);
+        });
+    } else {
+        console.error('No color palette found');
+    }
+
 }

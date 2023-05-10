@@ -23,6 +23,12 @@
     <img id="back-img" src="Untitled_design-2-removebg-preview.png">
 
 
+    <nav class="navbar navbar-light" style="background-color: #efaebd; justify-content: flex-start; gap: 10px;padding-left: 10px;">
+        <!-- Navbar content -->
+        <a class="nav-link" href="test5.html">Home </a>
+        <a class="nav-link" href="aboutUs.html">About Us</a>
+    </nav>
+
     <div class="wrapper">
         <div class="tool-part-1">
             <div class="title-text">
@@ -68,6 +74,19 @@
 
         </div>
 
+        <span style="text-align: center;">
+            <input type="checkbox" id="checkbox-agree">
+            *By using this tool, you agree to our <a href="data_policy.html">data policy</a>
+        </span>
+
+        <div id="imageError" class="error">
+            Could not detect face in the image<br>
+            Please submit a valid image!!
+        </div>
+        <div id="data-policy-error" class="error">
+            Please accept the data policy to continue
+        </div>
+
         <div class="output-text-boxes">
 
             <div class="row">
@@ -88,6 +107,11 @@
 
             </div>
 
+            <!-- <img src="" id="display-image"> -->
+            <div id="dominant-colours">
+                Dominant Colours :-
+                <div id="colorSwatches">Please Submit an Image</div>
+            </div>
 
             <div class="tables">
                 <table id="age-table">
@@ -106,8 +130,9 @@
         </footer>
 
     </div>
-    <script src="test6.js"></script>
 
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vibrant.js/1.0.0/Vibrant.min.js"></script> -->
+    <script src="test6.js"></script>
 </body>
 
 </html>
