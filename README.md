@@ -11,8 +11,3 @@ The rights of this project are reserved by - Dheraz Luth, Rully Kusumujaya, Odia
 Me and my colleagues are building a web application to predict age and gender using CNNs. 
 My role is a frontend engineer. I'm incharge of web application's design.
 
-
-
-
-
-

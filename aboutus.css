@@ -1,0 +1,200 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    background: radial-gradient(circle, lightblue, pink);
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+.title-text {
+    background-color: gainsboro;
+    max-width: 50%;
+    height: 60px;
+    position: relative;
+    left: 25%;
+    border-radius: 20px;
+    box-shadow: 5px 5px;
+    margin-bottom: 30px;
+}
+
+.heading {
+    position: relative;
+    bottom: 20px;
+    font-style: italic;
+    margin: 30px auto;
+    text-align: center;
+
+}
+
+
+.input-image {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.drag-and-drop {
+    margin: 50px auto;
+    height: 250px;
+    width: 40%;
+    border: 1px;
+    border-style: solid;
+    border-radius: 25px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.take-a-picture {
+    margin: 50px auto;
+    height: 250px;
+    width: 40%;
+    border: 1px;
+    border-style: solid;
+    border-radius: 25px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.button {
+    display: block;
+    background-color: black;
+    color: white;
+    margin: 10px auto;
+    width: 40%;
+    border-radius: 15px;
+    padding: 20px 50px;
+}
+
+.button:hover {
+    background-color: white;
+    color: black;
+}
+
+.image-container {
+    text-align: center;
+}
+
+#preview-image {
+    display: none;
+    height: auto;
+    width: 14%;
+}
+
+#imageError {
+    display: none;
+    background-color: #ced4db;
+    color: #bb673d;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    width: fit-content;
+}
+
+.output-text-boxes {
+    /* margin-top: 50px; */
+    /* padding: 10px; */
+    /* background-color: aqua; */
+    text-align: center;
+}
+
+#output-1 {
+    margin-top: 40px;
+}
+
+#output-2 {
+    margin-top: 40px;
+}
+
+#dominant-colours {
+    width: 90%;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #e4c8e2;
+    color: #b9635d;
+    font-weight: bold;
+}
+
+.color-swatch {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+.tables {
+    display: flex;
+    /* Use flexbox layout */
+}
+
+table {
+    border: 1px solid black;
+    /* Add border around the table */
+    flex-grow: 1;
+    /* Allow table to grow to fill available space */
+    margin: 20px 10px;
+    /* Add some margin between tables */
+}
+
+#age-table th {
+    border: 1px solid black;
+    /* Add border around each cell */
+    padding: 5px;
+    /* Add some padding inside cells */
+}
+
+#gender-table th {
+    border: 1px solid black;
+    /* Add border around each cell */
+    padding: 5px;
+    /* Add some padding inside cells */
+}
+
+#age-table td {
+    border: 1px solid black;
+    /* Add border around each cell */
+    padding: 5px;
+    /* Add some padding inside cells */
+}
+
+#gender-table td {
+    border: 1px solid black;
+    /* Add border around each cell */
+    padding: 5px;
+    /* Add some padding inside cells */
+}
+
+#back-img {
+    position: absolute;
+    z-index: -5;
+    opacity: 0.4;
+
+    left: 29vw;
+    bottom: 10px;
+
+    height: auto;
+    width: 55%;
+
+}
+
+
+footer {
+    background-color: #be657b;
+    margin-top: auto;
+}
+
+.creators {
+    position: relative;
+    left: 100px;
+}
